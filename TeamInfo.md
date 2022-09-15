@@ -4,7 +4,7 @@
 
 |   Info      |        Description     |
 | ----------- | ---------------------- |
-| TeamID      |         Team-005       |
+| TeamID      |         Team-006       |
 | TeamName    |         Cowbuddy       |
 | Captain     |       Rohan Parekh     |
 | Captain     |  rohanjp2@illinois.edu |
