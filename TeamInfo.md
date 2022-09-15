@@ -1,4 +1,4 @@
-# Q-team00-Cowbuddy
+# Q-team006-Cowbuddy
 
 ## Basic Information
 
