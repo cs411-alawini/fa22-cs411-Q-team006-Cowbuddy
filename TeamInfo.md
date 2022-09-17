@@ -10,8 +10,8 @@
 | Captain     |  rohanjp2@illinois.edu |
 | Member1     |        Kaushal Dadi    |
 | Member1     |   kdadi2@illinois.edu  |
-| Member2     |                        |
-| Member2     |                        |
+| Member2     |       Siyuan Qian      |
+| Member2     |  siyuanq4@illinois.edu |
 | Member3     |                        |
 | Member3     |                        |
 
