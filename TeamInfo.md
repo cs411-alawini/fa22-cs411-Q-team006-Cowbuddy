@@ -12,8 +12,8 @@
 | Member1     |   kdadi2@illinois.edu  |
 | Member2     |       Siyuan Qian      |
 | Member2     |  siyuanq4@illinois.edu |
-| Member3     |                        |
-| Member3     |                        |
+| Member3     |      Ian Livingston    |
+| Member3     |   iannl2@illinois.edu  |
 
 ## Project Information
 
