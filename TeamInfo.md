@@ -19,10 +19,10 @@
 
 |   Info      |        Description     |
 | ----------- | ---------------------- |
-|  Title      |       ProjectTitle     |
+|  Title      | What country is in the news?|
 | System URL  |      link_to_system    |
 | Video Link  |      link_to_video     |
 
 ## Project Summary
 
-This is a summary of the project!
+This project aims to provide users with a more global perspective of the news. Especially in America, people rarely hear about what is happening in other parts of the world. The website will display what countries are currently in the news and provide links to articles relevant to that country. Users will be able to search for countries that they are interested in and will get the opportunity to compare the results between different countries. 
