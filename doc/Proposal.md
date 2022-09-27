@@ -14,6 +14,9 @@ Our application will be useful because it will give users an easy way to find ou
 This application is also very unique because most news websites just list articles about various different topics. People can search for the name of a country, but Google results do not always give the most recent results. Also, there is no way to compare the results between different countries when searching on the internet. There aren't any websites that we know of that focus specifically on which countries are in the news at the moment.
 
 ## Realness
+The data powering our databases will be articles scraped from other companies from around the world. We will, ideally, get a major news/article from a variety of countries and scrap the articles from their websites. This will be enough to get us articles for most countries as well as that specific country's views on topics. We can also do an additional filter on these articles for them to be exclusively about a country, in case an article talks about multiple countries' sides.
+
+Our data, as stated before, will be articles. We will also scrap important information such as the author, company, date, country of origin, and much more. For right now we want to focus on being able to show all major articles for a particular country when asked for by the user.
 
 ## Functionalities
 We will have a country of the day displayed on the UI to engage users to look at news about other countries and learn new things about what is happening around the globe. We will also implement an auto-update feature that will essentially scrape websites every time the articles are updated. This might change depending on the resources required to do real-time updates, if that doesn’t work we might resort to hourly or once every 3-hour updates. Users will also be able to update the application by giving upvotes and downvotes to different articles, which will give us insight into the sources and types of articles people are interested in.
