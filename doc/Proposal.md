@@ -20,4 +20,7 @@ We will have a country of the day displayed on the UI to engage users to look at
 
 Another essential feature we will add is the ability to search for articles by country. This is the feature that will bring our project together. They will also be able to compare different countries and the news going on against each other. This will be a significant feature of our project as well as it will allow users to compare what countries are talking about, especially if there is political tension going on between the two countries. The final feature will be to go directly where an article was scraped. This is a necessary feature as we do not own these articles. And the users can then go to these article websites and look for other articles by this company.
 
+## UI Mockup
+![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/UI_Mockup.jpg)
+
 
