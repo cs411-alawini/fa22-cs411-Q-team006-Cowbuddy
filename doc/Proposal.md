@@ -26,4 +26,16 @@ Another essential feature we will add is the ability to search for articles by c
 ## UI Mockup
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/UI_Mockup.jpg)
 
+## Project Work Distribution
+Rohan will work on adding an upvote/downvote feature to all of the articles and make sure that the data is saved every time a user makes a selection. This feature will allow users to interact with the articles and communicate the type of articles that they want to be shown on the website.
+
+Kaushal will work on the “Country of the Day” feature of the project which will randomly choose a country for the day and show articles pertaining to that country. This feature will expose users to news from different countries, and encourage them to explore what is going on in different countries. I will also add the URLs for every article. This will allow the user to backtrack and find the article on the original website it was found.
+
+Scharfrichter will work on the “Compare Countries” feature of the project where users can choose two countries and get detailed statistics over a specific period of time. This feature will expose users to interactions between different countries, encourage them to identify countries that appear to be performing better, and prompt a search for ways to improve their own countries. 
+
+Ian will work on the search feature of the project and make sure that accurate results come up when users search for a country. The search function will work specifically as a way to filter all of the articles on the website by country. It could also be used to find specific types of articles if a user types in a keyword.
+
+For the Backend of the project, every group member will work on populating the databases pertaining to their frontend part and add in the implementation for it to work with their frontend. For example, Kaushal will work on Country of the Day in the frontend, and also populate the Database for all necessary info if not already there. He will also add all backend features required to have the frontend work.
+
+
 
