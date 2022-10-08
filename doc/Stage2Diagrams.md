@@ -2,7 +2,7 @@
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/UML.png)
 
 
-#### Relational Schema
+## Relational Schema
 
 
 Country( \
@@ -65,3 +65,29 @@ Likes( \
     &nbsp; DateDisliked: DATE, \
     &nbsp; [PK: (UserID, Article)] \
 )
+
+## Cardinality
+
+#### UserComments
+A user does not have to make any comments, and can make an unlimited amount of comments. A comment can only be made by one user. This means that there is a one-to-many relationship between Users and Comments. 
+
+#### UserDislikes
+A user does not have to make any dislikes, and can make an unlimited amount of dislikes. A dislike can only be made by one user. This means that there is a one-to-many relationship between Users and Dislikes. 
+
+#### UserLikes
+A user does not have to make any likes, and can make an unlimited amount of likes. A like can only be made by one user. This means that there is a one-to-many relationship between Users and Likes. 
+
+#### ArticleComments
+An Article does not need to have any comments, and can have an unlimited amount of comments. A specific comment can only be on a single article. This means that there is a one-to-many relationship between Articles and Comments. 
+
+#### ArticleDislikes
+An Article does not need to have any dislikes, and can have an unlimited amount of dislikes. A specific dislike can only be on a single article. This means that there is a one-to-many relationship between Articles and Dislikes. 
+
+#### ArticleLikes
+An Article does not need to have any likes, and can have an unlimited amount of likes. A specific like can only be on a single article. This means that there is a one-to-many relationship between Articles and Likes. 
+
+#### IsAbout
+An article must be about at least one country because all of the articles are related to at least one country. An article can also be about multiple countries and there is no limit to the amount of countries in an article. A country can have zero articles if not represented, but can also have an unlimited number of articles written about it. This means that there is a many-to -many relationship between Article and Country
+
+#### Published
+An article can only be on one publication. A publication does not have any articles, but it can have an unlimited number of articles on it. This means that there is a one-to-many relationship between Publication and Articles.
