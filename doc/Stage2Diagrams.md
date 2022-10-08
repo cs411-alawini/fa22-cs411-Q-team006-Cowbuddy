@@ -104,11 +104,11 @@ Each user can only make one comment per article.
 
 #### Likes
 
-The three attributes are immutable. Each user can only like an article once.
+The three attributes are immutable. Each user can only like an article once. Cannot have a like and a dislike for the same article.
 
 #### Dislikes
 
-The three attributes are immutable. Each user can only dislike an article once.
+The three attributes are immutable. Each user can only dislike an article once. Cannot have a like and a dislike for the same article.
 
 #### Articles
 
