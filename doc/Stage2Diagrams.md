@@ -112,7 +112,7 @@ The three attributes are immutable. Each user can only dislike an article once. 
 
 #### Articles
 
-The Likes and Dislikes attributs are counters that are automatically updated. Each article must be related to at least one country and must be published by exactly one publisher.
+The Likes and Dislikes attributs are counters that are automatically updated. Each article must be related to at least one country and must be published by exactly one publisher. We will add a trigger to make sure that a user cannot both like and dislike an article.
 
 #### Countries
 
@@ -120,4 +120,4 @@ NumberOfArticles will be automatically updated.
 
 #### Publications
 
-N/A  
+A publication does not have to have an article. An article can only be on one publication.  
