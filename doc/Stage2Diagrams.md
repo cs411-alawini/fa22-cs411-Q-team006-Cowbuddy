@@ -91,3 +91,33 @@ An article must be about at least one country because all of the articles are re
 
 #### Published
 An article can only be on one publication. A publication does not have any articles, but it can have an unlimited number of articles on it. This means that there is a one-to-many relationship between Publication and Articles.
+
+## Assumptions
+
+#### Users
+
+Each user will have a unique UserID, and a single email. username, and password. The ArticlesRead and ArticlesLiked are counters that will keep track of how many articles the user has read and liked, respectively. The AccountCreationDate attribute will be automatically created when the account is made.
+
+#### Comments
+
+Each user can only make one comment per article.
+
+#### Likes
+
+The three attributes are immutable. Each user can only like an article once.
+
+#### Dislikes
+
+The three attributes are immutable. Each user can only dislike an article once.
+
+#### Articles
+
+The Likes and Dislikes attributs are counters that are automatically updated. Each article must be related to at least one country and must be published by exactly one publisher.
+
+#### Countries
+
+NumberOfArticles will be automatically updated.
+
+#### Publications
+
+N/A  
