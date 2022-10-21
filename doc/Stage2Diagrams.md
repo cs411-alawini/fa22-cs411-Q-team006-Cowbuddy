@@ -25,6 +25,7 @@ Article( \
     &nbsp; ArticleID: INT [PK], \
     &nbsp; Title: VARCHAR(128), \
     &nbsp; Author: VARCHAR(64), \
+    &nbsp; Date: DATE, \
     &nbsp; PublicationID: INT [FK to Publication.PublicationID], \
     &nbsp; Likes: INT, \
     &nbsp; Dislikes: INT \
