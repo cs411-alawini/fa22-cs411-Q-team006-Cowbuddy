@@ -22,7 +22,7 @@ Publication( \
 )
 
 Article( \
-    &nbsp; URL: VARCHAR(256) [PK], \
+    &nbsp; ArticleID: INT [PK], \
     &nbsp; Title: VARCHAR(128), \
     &nbsp; Author: VARCHAR(64), \
     &nbsp; PublicationID: INT [FK to Publication.PublicationID], \
@@ -31,7 +31,7 @@ Article( \
 )
 
 IsAbout( \
-    &nbsp; URL: VARCHAR(256) [FK to Article.URL], \
+    &nbsp; ArticleID: INT [FK to Article.ArticleID], \
     &nbsp; CountryID: INT [FK to Country.CountryID], \
     &nbsp; [PK: (URL, CountryID)] \
 )
@@ -56,13 +56,13 @@ Comments( \
 Dislikes( \
     &nbsp; UserID: INT [FK to Users.UserID], \
     &nbsp; Article: VARCHAR(128) [FK to Article.URL], \
-    &nbsp; DateLiked: DATE, [PK: (UserID, Article)] \
+    &nbsp; DateDisiked: DATE, [PK: (UserID, Article)] \
 )
 
 Likes( \
     &nbsp; UserID: INT [FK to Users.UserID], \
     &nbsp; Article: VARCHAR(128) [FK to Article.URL], \
-    &nbsp; DateDisliked: DATE, \
+    &nbsp; DateLiked: DATE, \
     &nbsp; [PK: (UserID, Article)] \
 )
 
