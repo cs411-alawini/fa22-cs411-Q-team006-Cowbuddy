@@ -17,11 +17,11 @@ CREATE TABLE Publication (
 );
 
 CREATE TABLE Article (
-    URL VARCHAR(256) PRIMARY KEY,
+    ArticleID INT PRIMARY KEY,
     Title VARCHAR(128),
     Author VARCHAR(64),
-    PublicationID INT REFERENCES Publication(PublicationID) ON DELETE CASCADE,
-    CountryID INT REFERENCES Country(CountryID) ON DELETE SET NULL,
+    Date DATE,
+    PublicationID INT,
     Likes INT,
     Dislikes INT
 );
