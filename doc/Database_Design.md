@@ -65,7 +65,7 @@ CREATE TABLE Likes (
 ## Data Insertion
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/Counts.png)
 
-## Advanced Subqueries
+## Advanced Queries
 ~~~~sql
 SELECT DISTINCT ArticleID, Title, DateLiked, Likes
 FROM Articles a JOIN Likes l USING (ArticleID)
@@ -96,3 +96,8 @@ LIMIT 15;
 
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/SubqueryTwo.png)
 
+## Indexing Analaysis
+
+CREATE INDEX article_idx on Articles(ArticleID)
+CREATE INDEX date_liked_idx on Likes(DateLiked);
+CREATE INDEX likes_idx on Articles(Likes);
