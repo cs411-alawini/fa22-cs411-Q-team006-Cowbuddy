@@ -59,3 +59,6 @@ CREATE TABLE Likes (
 
 ## Terminal Connection
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/TerminalInfo.png)
+
+## Data Insertion
+![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/Counts.png)
