@@ -97,7 +97,14 @@ LIMIT 15;
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/SubqueryTwo.png)
 
 ## Indexing Analaysis
+![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/A1.png)
 
 CREATE INDEX article_idx on Articles(ArticleID)
-CREATE INDEX date_liked_idx on Likes(DateLiked);
-CREATE INDEX likes_idx on Articles(Likes);
+![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/A2.png)
+
+CREATE INDEX date_liked_idx on Likes(DateLiked)
+![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/A3.png)
+
+CREATE INDEX likes_idx on Articles(Likes)
+![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/A4.png)
+
