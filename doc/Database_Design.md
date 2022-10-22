@@ -66,6 +66,7 @@ CREATE TABLE Likes (
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/Counts.png)
 
 ## Advanced Subqueries
+~~~~sql
 SELECT DISTINCT ArticleID, Title, DateLiked, Likes
 FROM Articles a JOIN Likes l USING (ArticleID)
 WHERE DateLiked > 20221014 AND Likes > 400
@@ -77,8 +78,21 @@ FROM Articles a JOIN Dislikes d USING (ArticleID)
 WHERE DateDisliked > 20221014 AND Dislikes > 250
 
 ORDER BY ArticleID;
+~~~~
 
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/SubqueryOne.png)
 
 
+~~~~sql
+SELECT a.Title, a.Likes ArticleLikes, t.DailyLikes
+FROM Articles a NATURAL JOIN (
+    SELECT DateLiked, COUNT(*) DailyLikes
+    FROM IsAbout NATURAL JOIN Likes
+    GROUP BY DateLiked
+) as t
+ORDER BY t.DailyLikes DESC, a.Likes DESC
+LIMIT 15;
+~~~~
+
+![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/SubqueryTwo.png)
 
