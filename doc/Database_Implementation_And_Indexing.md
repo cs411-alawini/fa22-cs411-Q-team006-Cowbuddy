@@ -84,6 +84,9 @@ ORDER BY ArticleID;
 
 
 ## Indexing Analaysis
+Original Query:
+```
+
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/A1.png)
 
 ~~~~sql
@@ -100,6 +103,8 @@ CREATE INDEX date_liked_idx on Likes(DateLiked)
 CREATE INDEX likes_idx on Articles(Likes)
 ~~~~
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/A4.png)
+
+We chose the indexing on the Likes attribute of the Articles table because it had the lowest time on most of the nested loops compared to the ArticleID attribute and the DateLiked attribute. All of these three indexes were not significantly better than the query without any indexes, but had certain spots where they were much better. This was clearly shown on the nested inner join, where the Likes index had a time of 0.039, compared to the original time of 0.126. This may not be significant, but the query was fairly long and the time adds up in the end. The indexing works best when looking at Likes because there are many posts with multiple likes, which gets combined during the indexing. All three of our queries were very similar, but we chose likes at the end because it is able to look through the joins the fastest which is an important part of the query.
 
 ## Advanced Queries 2
 
