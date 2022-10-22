@@ -1,5 +1,6 @@
 # DDL Commands
 
+~~~~sql
 CREATE TABLE Countries (
     CountryID INT PRIMARY KEY,
     OfficialName VARCHAR(64),
@@ -56,6 +57,7 @@ CREATE TABLE Likes (
     DateLiked DATE,
     PRIMARY KEY(UserID, ArticleID)
 );
+~~~~
 
 ## Terminal Connection
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/TerminalInfo.png)
