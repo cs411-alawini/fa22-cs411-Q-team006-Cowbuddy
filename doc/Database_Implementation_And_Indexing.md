@@ -84,14 +84,14 @@ ORDER BY ArticleID;
 
 
 ~~~~sql
-SELECT a.Title, a.Likes ArticleLikes, t.DailyLikes
+SELECT a.Title, a.Date, t.NumberOfArticles
 FROM Articles a NATURAL JOIN (
-    SELECT DateLiked, COUNT(*) DailyLikes
-    FROM IsAbout NATURAL JOIN Likes
-    GROUP BY DateLiked
-) as t
-ORDER BY t.DailyLikes DESC, a.Likes DESC
-LIMIT 15;
+    SELECT Author, COUNT(*) NumberOfArticles
+    FROM Articles
+    WHERE Title LIKE '%The%' OR Title LIKE '%the%'
+    GROUP BY Author
+) t
+ORDER BY t.NumberOfArticles DESC, a.Title;
 ~~~~
 
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/SubqueryTwo.png)
