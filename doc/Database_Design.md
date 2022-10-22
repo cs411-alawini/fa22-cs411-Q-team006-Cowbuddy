@@ -1,14 +1,13 @@
 # DDL Commands
 
-CREATE TABLE Country (
+CREATE TABLE Countries (
     CountryID INT PRIMARY KEY,
     OfficialName VARCHAR(64),
     Population INT,
-    Continent VARCHAR(64),
     NumberOfArticles INT
 );
 
-CREATE TABLE Publication (
+CREATE TABLE Publications (
     PublicationID INT PRIMARY KEY,
     PublicationName VARCHAR(64),
     CountryOfOrigin INT REFERENCES Country(CountryID) ON DELETE SET NULL,
@@ -16,12 +15,12 @@ CREATE TABLE Publication (
     Medium VARCHAR(64)
 );
 
-CREATE TABLE Article (
+CREATE TABLE Articles (
     ArticleID INT PRIMARY KEY,
-    Title VARCHAR(128),
-    Author VARCHAR(64),
-    Date DATE,
-    PublicationID INT,
+    Title VARCHAR(256),
+    Author VARCHAR(128),
+    `Date` DATE,
+    PublicationID INT REFERENCES Publication (PublicationID) ON DELETE CASCADE,
     Likes INT,
     Dislikes INT
 );
@@ -34,29 +33,28 @@ CREATE TABLE Users (
     ArticlesRead INT,
     ArticlesLiked INT,
     AccountCreationDate DATE
-
 );
 
 CREATE TABLE Comments (
     UserID INT REFERENCES Users(UserID) ON DELETE SET NULL,
-    Article VARCHAR(128) REFERENCES Article(URL) ON DELETE CASCADE,
-    Context VARCHAR(128),
+    ArticleID INT REFERENCES Articles(ArticleID) ON DELETE CASCADE,
+    Content VARCHAR(512),
     DateCommented DATE,
-    PRIMARY KEY (UserID, Article)
+    PRIMARY KEY (UserID, ArticleID)
 );
 
 CREATE TABLE Dislikes (
     UserID INT REFERENCES Users(UserID) ON DELETE SET NULL,
-    Article VARCHAR(128) REFERENCES Article(URL) ON DELETE CASCADE,
+    ArticleID INT REFERENCES Article(ArticleID) ON DELETE CASCADE,
     DateDisliked DATE,
-    PRIMARY KEY (UserID, Article)
+    PRIMARY KEY(UserID, ArticleID)
 );
 
 CREATE TABLE Likes (
     UserID INT REFERENCES Users(UserID) ON DELETE SET NULL,
-    Article VARCHAR(128) REFERENCES Article(URL) ON DELETE CASCADE,
+    ArticleID INT REFERENCES Article(ArticleID) ON DELETE CASCADE,
     DateLiked DATE,
-    PRIMARY KEY (UserID, Article)
+    PRIMARY KEY(UserID, ArticleID)
 );
 
 ## Terminal Connection
