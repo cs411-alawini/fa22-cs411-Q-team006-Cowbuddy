@@ -191,4 +191,4 @@ the performance of this query. It may happen because the `Title` values are used
 pattern matching, which doesn't rely on the indices (each record must be compared to the pattern
 no matter what). Adding index to the `Author` column significantly reduces the cost of the query.
 The execution time of the query reduces from more than 200 ms to less than 140 ms. The speed-up
-happens the index helps reduce the cost of scanning the `Article` table for `Author` from 210.25 to 0.53.
+happens the index helps reduce the cost of scanning the `Articles` table for `Author` from 210.25 to 0.53.
