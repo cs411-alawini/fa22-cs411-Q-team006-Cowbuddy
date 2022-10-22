@@ -84,8 +84,6 @@ ORDER BY ArticleID;
 
 
 ## Indexing Analaysis
-Original Query:
-```
 
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/A1.png)
 
