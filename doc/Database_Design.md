@@ -78,6 +78,7 @@ WHERE DateDisliked > 20221014 AND Dislikes > 250
 
 ORDER BY ArticleID;
 
+![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/SubqueryOne.png)
 
 
 
