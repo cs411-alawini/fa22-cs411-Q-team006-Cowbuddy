@@ -86,13 +86,19 @@ ORDER BY ArticleID;
 ## Indexing Analaysis
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/A1.png)
 
+~~~~sql
 CREATE INDEX article_idx on Articles(ArticleID)
+~~~~
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/A2.png)
 
+~~~~sql
 CREATE INDEX date_liked_idx on Likes(DateLiked)
+~~~~
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/A3.png)
 
+~~~~sql
 CREATE INDEX likes_idx on Articles(Likes)
+~~~~
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/A4.png)
 
 ## Advanced Queries 2
