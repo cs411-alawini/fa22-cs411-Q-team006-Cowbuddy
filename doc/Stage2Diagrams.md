@@ -56,13 +56,13 @@ Comments( \
 
 Dislikes( \
     &nbsp; UserID: INT [FK to Users.UserID], \
-    &nbsp; Article: VARCHAR(128) [FK to Article.URL], \
+    &nbsp; ArticleID: VARCHAR(128) [FK to Article.URL], \
     &nbsp; DateDisiked: DATE, [PK: (UserID, Article)] \
 )
 
 Likes( \
     &nbsp; UserID: INT [FK to Users.UserID], \
-    &nbsp; Article: VARCHAR(128) [FK to Article.URL], \
+    &nbsp; ArticleID: VARCHAR(128) [FK to Article.URL], \
     &nbsp; DateLiked: DATE, \
     &nbsp; [PK: (UserID, Article)] \
 )
