@@ -65,7 +65,7 @@ CREATE TABLE Likes (
 ## Data Insertion
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/Counts.png)
 
-## Advanced Queries
+## Advanced Queries 1
 ~~~~sql
 SELECT DISTINCT ArticleID, Title, DateLiked, Likes
 FROM Articles a JOIN Likes l USING (ArticleID)
@@ -94,6 +94,8 @@ CREATE INDEX date_liked_idx on Likes(DateLiked)
 
 CREATE INDEX likes_idx on Articles(Likes)
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/A4.png)
+
+## Advanced Queries 2
 
 ~~~~sql
 SELECT a.Title, a.Date, t.NumberOfArticles
