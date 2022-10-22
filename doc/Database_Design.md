@@ -64,3 +64,20 @@ CREATE TABLE Likes (
 
 ## Data Insertion
 ![alt text](https://github.com/cs411-alawini/fa22-cs411-Q-team006-Cowbuddy/blob/main/doc/Counts.png)
+
+## Advanced Subqueries
+SELECT DISTINCT ArticleID, Title, DateLiked, Likes
+FROM Articles a JOIN Likes l USING (ArticleID)
+WHERE DateLiked > 20221014 AND Likes > 400
+
+UNION
+
+SELECT DISTINCT ArticleID, Title, DateDisliked, Dislikes
+FROM Articles a JOIN Dislikes d USING (ArticleID)
+WHERE DateDisliked > 20221014 AND Dislikes > 250
+
+ORDER BY ArticleID;
+
+
+
+
