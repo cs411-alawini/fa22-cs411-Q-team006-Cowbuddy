@@ -71,8 +71,12 @@ function App() {
                     setTitle(e.target.value)
                 }}/>
                 <label>Author:</label>
-                <input type="text" name="setAuthor" onChange={(e) => {
+                <input type="text" name="Author" onChange={(e) => {
                     setAuthor(e.target.value)
+                }}/>
+                <label>Date:</label>
+                <input type="text" name="Date" onChange={(e) => {
+                    setDate(e.target.value)
                 }}/>
                 <label>PublicationID:</label>
                 <input type="text" name="PublicationID" onChange={(e) => {

@@ -7,8 +7,7 @@ const {response} = require("express");
 const port = 3001;
 
 const db = mysql.createConnection({
-    host: '127.0.0.1',
-    port: 5404,
+    host: '127.0.0.1:5404',
     user: 'root',
     password: '-/#us-^,ys"-HzQR',
     database: 'stage3',
