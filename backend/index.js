@@ -6,12 +6,13 @@ const cors = require("cors");
 const {response} = require("express");
 const port = 3001;
 
-var db = mysql.createConnection({
-    host: 'localhost',
+const db = mysql.createConnection({
+    host: '127.0.0.1',
+    port: 5404,
     user: 'root',
-    password: 'mypassword',
-    database: '411demo',
-})
+    password: '-/#us-^,ys"-HzQR',
+    database: 'stage3',
+});
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -25,7 +26,7 @@ app.use(express.json());
 // })
 
 app.get("/api/get", (require, response) => {
-    const sqlSelect = "SELECT * FROM movie_reviews";
+    const sqlSelect = "SELECT * FROM Articles LIMIT 10";
     db.query(sqlSelect, (err, result) => {
         response.send(result);
     })
@@ -41,11 +42,11 @@ app.post("/api/insert", (require, response) => {
     })
 })
 
-app.delete("/api/delete/:movieName", (require, response) => {
-    const movieName = require.params.movieName;
+app.delete("/api/delete/:ArticleID", (require, response) => {
+    const ArticleID = require.params.ArticleID;
 
-    const sqlDelete = "DELETE FROM `movie_reviews` WHERE `movieName` = ?";
-    db.query(sqlDelete, movieName, (err, result) => {
+    const sqlDelete = "DELETE FROM `Articles` WHERE `ArticleID` = ?";
+    db.query(sqlDelete, ArticleID, (err, result) => {
         if (err) {
             console.log(error);
         }
@@ -53,11 +54,11 @@ app.delete("/api/delete/:movieName", (require, response) => {
 })
 
 app.put("/api/update", (require, response) => {
-    const movieName = require.body.movieName;
-    const movieReview = require.body.movieReview;
+    const ID = require.body.ArticleID;
+    const Title = require.body.Title;
 
-    const sqlUpdate = "UPDATE `movie_review` SET `movie_review` = ? WHERE `movieName` = ?";
-    db.query(sqlUpdate, [movieReview, movieName], (err, result) => {
+    const sqlUpdate = "UPDATE `Articles` SET `Title` e ? WHERE `ArticleID` = ?";
+    db.query(sqlUpdate, [Title, ID], (err, result) => {
         if (err) {
             console.log(error);
         }

@@ -3,42 +3,57 @@ import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 
 function App() {
-    const [movieName, setMovieName] = useState('');
-    const [Review, setReview] = useState('');
-    const [movieReviewList, setMovieReviewList] = useState([]);
-    const [newReview, setNewReview] = useState('');
+    const [ArticleID, setArticleID] = useState('');
+    const [Title, setTitle] = useState('');
+    const [Author, setAuthor] = useState('');
+    const [Date, setDate] = useState('');
+    const [PublicationID, setPublicationID] = useState('');
+    const [Likes, setLikes] = useState('');
+    const [Dislikes, setDislikes] = useState('');
+    const [articleList, setArticleList] = useState([]);
+    const [newArticle, setNewArticle] = useState('');
 
     useEffect(() => {
         Axios.get('http://localhost:3002/api/get').then((response) => {
-            setMovieReviewList(response.data);
+            setArticleList(response.data);
         })
     }, [])
 
-    const submitReview = () => {
+    const submitArticle = () => {
         Axios.post('http://localhost:3002/api/insert', {
-            movieName: movieName,
-            movieReview: Review
+            ArticleID: ArticleID,
+            Title: Title,
+            Author: Author,
+            Date: Date,
+            PublicationID: PublicationID,
+            Likes: Likes,
+            Dislikes: Dislikes
         });
 
-        setMovieReviewList([
-            ...movieReviewList,
+        setArticleList([
+            ...articleList,
             {
-                movieName: movieName,
-                movieReview: Review
+                ArticleID: ArticleID,
+                Title: Title,
+                Author: Author,
+                Date: Date,
+                PublicationID: PublicationID,
+                Likes: Likes,
+                Dislikes: Dislikes
             }
         ]);
     };
 
-    const deleteReview = (movieName) => {
-        Axios.delete(`http://localhost:3002/api/delete/${movieName}`);
+    const deleteArticle = (ArticleID) => {
+        Axios.delete(`http://localhost:3002/api/delete/${ArticleID}`);
     };
 
-    const updateReview = (movieName) => {
+    const updateArticle = (ArticleID, Title) => {
         Axios.put(`http://localhost:3002/api/update`, {
-            movieName: movieName,
-            movieReview: newReview
+            ArticleID: ArticleID,
+            Title: Title
         });
-        setNewReview("")
+        setNewArticle("")
     };
 
 
@@ -47,27 +62,43 @@ function App() {
             <h1>CRUD APPLICATIONS</h1>
 
             <div className='form'>
-                <label>Movie Name:</label>
-                <input type="text" name="movieName" onChange={(e) => {
-                    setMovieName(e.target.value)
+                <label>ArticleID:</label>
+                <input type="text" name="ArticleID" onChange={(e) => {
+                    setArticleID(e.target.value)
                 }}/>
-                <label>Review:</label>
-                <input type="text" name="Review" onChange={(e) => {
-                    setReview(e.target.value)
+                <label>Title:</label>
+                <input type="text" name="Title" onChange={(e) => {
+                    setTitle(e.target.value)
+                }}/>
+                <label>Author:</label>
+                <input type="text" name="setAuthor" onChange={(e) => {
+                    setAuthor(e.target.value)
+                }}/>
+                <label>PublicationID:</label>
+                <input type="text" name="PublicationID" onChange={(e) => {
+                    setPublicationID(e.target.value)
+                }}/>
+                <label>Likes:</label>
+                <input type="text" name="Likes" onChange={(e) => {
+                    setLikes(e.target.value)
+                }}/>
+                <label>Dislikes:</label>
+                <input type="text" name="Dislikes" onChange={(e) => {
+                    setDislikes(e.target.value)
                 }}/>
 
-                <button onClick={submitReview}> Submit</button>
-                {movieReviewList.map((val) => {
+                <button onClick={submitArticle}> Submit</button>
+                {articleList.map((val) => {
                     return (
                         <div className="card">
-                            <h1> MovieName: {val.movieName}</h1>
-                            <p>Movie Review: {val.movieReview}</p>
+                            <h1> ArticleID: {val.ArticleID}</h1>
+                            <p> Title: {val.Title}</p>
                             <button onClick={() => {
-                                deleteReview(val.movieName)
+                                deleteArticle(val.ArticleID)
                             }}> Delete
                             </button>
                             <button onClick={() => {
-                                updateReview(val.movieName)
+                                updateArticle(val.ArticleID, val.Title)
                             }}> Update
                             </button>
                         </div>
