@@ -9,7 +9,7 @@ const port = 3001;
 const db = mysql.createConnection({
     host: '127.0.0.1:5404',
     user: 'root',
-    password: '-/#us-^,ys"-HzQR',
+    password: 'Cowbuddy123',
     database: 'stage3',
 });
 
@@ -25,19 +25,24 @@ app.use(express.json());
 // })
 
 app.get("/api/get", (require, response) => {
-    const sqlSelect = "SELECT * FROM Articles LIMIT 10";
+    const sqlSelect = "SELECT * FROM Articles LIMIT 1000";
     db.query(sqlSelect, (err, result) => {
         response.send(result);
     })
 })
 
 app.post("/api/insert", (require, response) => {
-    const movieName = require.body.movieName;
-    const movieReview = require.body.movieReview;
+    const ArticleID = require.body.ArticleID;
+    const Title = require.body.Title;
+    const Author = require.body.Author;
+    const Date = require.body.Date;
+    const PublicationID = require.body.PublicationID;
+    const Likes = require.body.Likes;
+    const Dislikes = require.body.Dislikes;
 
-    const sqlInsert = "INSERT INTO `movie_reviews` (`movieName`, `movieReview`) VALUES (?,?)";
-    db.query(sqlInsert, [movieName, movieReview], (err, result) => {
-        console.log(error);  // ?
+    const sqlInsert = "INSERT INTO `Articles` VALUES (?,?,?,?,?,?,?)";
+    db.query(sqlInsert, [ArticleID, Title, Author, Date, PublicationID, Likes, Dislikes], (err, result) => {
+        console.log(err);  // ?
     })
 })
 
@@ -47,7 +52,7 @@ app.delete("/api/delete/:ArticleID", (require, response) => {
     const sqlDelete = "DELETE FROM `Articles` WHERE `ArticleID` = ?";
     db.query(sqlDelete, ArticleID, (err, result) => {
         if (err) {
-            console.log(error);
+            console.log(err);
         }
     })
 })

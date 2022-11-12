@@ -19,6 +19,10 @@ function App() {
         })
     }, [])
 
+    const searchArticle = () => {
+
+    }
+
     const submitArticle = () => {
         Axios.post('http://localhost:3002/api/insert', {
             ArticleID: ArticleID,
@@ -97,6 +101,11 @@ function App() {
                         <div className="card">
                             <h1> ArticleID: {val.ArticleID}</h1>
                             <p> Title: {val.Title}</p>
+                            <p> Author: {val.Author}</p>
+                            <p> Date: {val.Date}</p>
+                            <p> PublicationID: {val.PublicationID}</p>
+                            <p> Likes: {val.Likes}</p>
+                            <p> Dislikes: {val.Dislikes}</p>
                             <button onClick={() => {
                                 deleteArticle(val.ArticleID)
                             }}> Delete
