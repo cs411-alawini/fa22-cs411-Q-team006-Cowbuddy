@@ -11,20 +11,55 @@ function App() {
     const [Likes, setLikes] = useState('');
     const [Dislikes, setDislikes] = useState('');
     const [articleList, setArticleList] = useState([]);
-    const [newArticle, setNewArticle] = useState('');
+    const [searchArticleList, setSearchArticleList] = useState([]);
+    const [newTitle, setNewTitle] = useState('');
+    const [searchID, setSearchID] = useState('');
 
-    useEffect(() => {
-        Axios.get('http://localhost:3002/api/get').then((response) => {
-            setArticleList(response.data);
-        })
-    }, [])
+    // useEffect(() => {
+    //     Axios.get('http://localhost:3001/api/get').then((response) => {
+    //         setArticleList(response.data);
+    //     })
+    // }, [])
 
-    const searchArticle = () => {
+    const searchArticle = (searchID) => {
+        Axios.post(`http://localhost:3001/api/search/${searchID}`, {
+            ArticleID: ArticleID,
+            Title: Title,
+            Author: Author,
+            Date: Date,
+            PublicationID: PublicationID,
+            Likes: Likes,
+            Dislikes: Dislikes
+        });
 
+        setSearchArticleList([
+            ...searchArticleList,
+            {
+                ArticleID: ArticleID,
+                Title: Title,
+                Author: Author,
+                Date: Date,
+                PublicationID: PublicationID,
+                Likes: Likes,
+                Dislikes: Dislikes
+            }
+        ]);
+    };
+
+    const advQuery1 = () => {
+        Axios.get(`http://localhost:3001/api/adv1`).then((response) => {
+            console.log(response.data);
+        });
+    }
+
+    const advQuery2 = () => {
+        Axios.get(`http://localhost:3001/api/adv2`).then((response) => {
+            console.log(response.data);
+        });
     }
 
     const submitArticle = () => {
-        Axios.post('http://localhost:3002/api/insert', {
+        Axios.post('http://localhost:3001/api/insert', {
             ArticleID: ArticleID,
             Title: Title,
             Author: Author,
@@ -49,15 +84,15 @@ function App() {
     };
 
     const deleteArticle = (ArticleID) => {
-        Axios.delete(`http://localhost:3002/api/delete/${ArticleID}`);
+        Axios.delete(`http://localhost:3001/api/delete/${ArticleID}`);
     };
 
-    const updateArticle = (ArticleID, Title) => {
-        Axios.put(`http://localhost:3002/api/update`, {
+    const updateArticle = (ArticleID, newTitle) => {
+        Axios.put(`http://localhost:3001/api/update`, {
             ArticleID: ArticleID,
-            Title: Title
+            Title: newTitle
         });
-        setNewArticle("")
+        setNewTitle("")
     };
 
 
@@ -65,6 +100,49 @@ function App() {
         <div className="App">
             <h1>CRUD APPLICATIONS</h1>
 
+            <h2>SEARCH Article</h2>
+            <div className='form'>
+                <label>ArticleID:</label>
+                <input type="text" name="searchID" onChange={(e) => {
+                    setSearchID(e.target.value)
+                }}/>
+
+                <button onClick={searchArticle}> Submit</button>
+                {searchArticleList.map((val) => {
+                    return (
+                        <div className="card">
+                            <h1> ArticleID: {val.ArticleID}</h1>
+                            <p> Title: {val.Title}</p>
+                            <p> Author: {val.Author}</p>
+                            <p> Date: {val.Date}</p>
+                            <p> PublicationID: {val.PublicationID}</p>
+                            <p> Likes: {val.Likes}</p>
+                            <p> Dislikes: {val.Dislikes}</p>
+                            <button onClick={() => {
+                                deleteArticle(val.ArticleID)
+                            }}> Delete
+                            </button>
+                            <input type="text" id='updateInput' onChange={(e) => {
+                                setNewTitle(e.target.value)
+                            }}/>
+                            <button onClick={() => {
+                                updateArticle(val.ArticleID, newTitle)
+                            }}> Update
+                            </button>
+                        </div>
+                    );
+                })}
+
+            </div>
+
+            <h2>Advanced Queries</h2>
+            <div className='form'>
+                <button onClick={advQuery1}> Run Advanced Query 1</button>
+
+                <button onClick={advQuery2}> Run Advanced Query 2</button>
+            </div>
+
+            <h2>INSERT Article</h2>
             <div className='form'>
                 <label>ArticleID:</label>
                 <input type="text" name="ArticleID" onChange={(e) => {
@@ -110,8 +188,11 @@ function App() {
                                 deleteArticle(val.ArticleID)
                             }}> Delete
                             </button>
+                            <input type="text" id='updateInput' onChange={(e) => {
+                                setNewTitle(e.target.value)
+                            }}/>
                             <button onClick={() => {
-                                updateArticle(val.ArticleID, val.Title)
+                                updateArticle(val.ArticleID, newTitle)
                             }}> Update
                             </button>
                         </div>
@@ -119,7 +200,8 @@ function App() {
                 })}
             </div>
         </div>
-    );
+    )
+        ;
 }
 
 export default App;
