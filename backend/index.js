@@ -34,19 +34,19 @@ app.get('/', (require, response) => {
 })
 
 app.get("/api/get", (require, response) => {
-    const sqlSelect = "SELECT * FROM Articles LIMIT 1";
+    const sqlSelect = "SELECT * FROM Articles LIMIT 10";
     db.query(sqlSelect, (err, result) => {
         response.send(result);
     })
 })
 
-app.post("/api/search/:ArticleID", (require, response) => {
+app.get("/api/search/:ArticleID", (require, response) => {
     const searchID = require.params.ArticleID;
     const sqlSelect = "SELECT * FROM `Articles` WHERE `ArticleID` = ?";
     db.query(sqlSelect, searchID, (err, result) => {
         response.send(result);
-    })
-})
+    });
+});
 
 app.get("/api/adv1", (require, response) => {
     const sqlAdv1 = "SELECT DISTINCT ArticleID, Title, DateLiked, Likes " +
@@ -59,8 +59,8 @@ app.get("/api/adv1", (require, response) => {
         "ORDER BY ArticleID;";
     db.query(sqlAdv1, (err, result) => {
         response.send(result);
-    })
-})
+    });
+});
 
 app.get("/api/adv2", (require, response) => {
     const sqlAdv2 = "SELECT a.Title, a.Date, t.NumberOfArticles " +

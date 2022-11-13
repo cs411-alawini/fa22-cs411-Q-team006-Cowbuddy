@@ -1,6 +1,7 @@
 import './App.css';
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
+import * as util from "util";
 
 function App() {
     const [ArticleID, setArticleID] = useState('');
@@ -21,29 +22,10 @@ function App() {
     //     })
     // }, [])
 
-    const searchArticle = (searchID) => {
-        Axios.post(`http://localhost:3001/api/search/${searchID}`, {
-            ArticleID: ArticleID,
-            Title: Title,
-            Author: Author,
-            Date: Date,
-            PublicationID: PublicationID,
-            Likes: Likes,
-            Dislikes: Dislikes
+    const searchArticle = () => {
+        Axios.get(`http://localhost:3001/api/search/${searchID}`).then((response) => {
+            setSearchArticleList(response.data);
         });
-
-        setSearchArticleList([
-            ...searchArticleList,
-            {
-                ArticleID: ArticleID,
-                Title: Title,
-                Author: Author,
-                Date: Date,
-                PublicationID: PublicationID,
-                Likes: Likes,
-                Dislikes: Dislikes
-            }
-        ]);
     };
 
     const advQuery1 = () => {
@@ -139,6 +121,7 @@ function App() {
             <div className='form'>
                 <button onClick={advQuery1}> Run Advanced Query 1</button>
 
+                <br/>
                 <button onClick={advQuery2}> Run Advanced Query 2</button>
             </div>
 
