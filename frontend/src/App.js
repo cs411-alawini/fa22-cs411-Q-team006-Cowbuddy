@@ -1,7 +1,6 @@
 import './App.css';
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
-import * as util from "util";
 
 function App() {
     const [ArticleID, setArticleID] = useState('');
@@ -16,11 +15,11 @@ function App() {
     const [newTitle, setNewTitle] = useState('');
     const [searchID, setSearchID] = useState('');
 
-    // useEffect(() => {
-    //     Axios.get('http://localhost:3001/api/get').then((response) => {
-    //         setArticleList(response.data);
-    //     })
-    // }, [])
+    useEffect(() => {
+        Axios.get('http://localhost:3001/api/get').then((response) => {
+            setArticleList(response.data);
+        })
+    }, [])
 
     const searchArticle = () => {
         Axios.get(`http://localhost:3001/api/search/${searchID}`).then((response) => {
