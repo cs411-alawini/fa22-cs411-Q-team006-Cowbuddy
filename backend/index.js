@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
-const {response} = require("express");
 const port = 3001;
 
 const db = mysql.createConnection({
@@ -34,7 +33,7 @@ app.get('/', (require, response) => {
 })
 
 app.get("/api/get", (require, response) => {
-    const sqlSelect = "SELECT * FROM Articles WHERE ArticleID <> 0 LIMIT 10";
+    const sqlSelect = "SELECT * FROM Articles LIMIT 10";
     db.query(sqlSelect, (err, result) => {
         response.send(result);
     })
