@@ -6,8 +6,8 @@
 }
 
 body {
-    font-family: "Source Sans Pro", sans-serif;
-    color: white;
+    font-family: 'Raleway', sans-serif;
+    color: beige;
     font-weight: 300;
     background: #50a3a2;
     width: 100%;
@@ -29,6 +29,20 @@ App {
     text-align: center;
 }
 
+::placeholder {
+    font-family: 'Raleway', sans-serif;
+    color: beige;
+    font-weight: 300;
+    width: 100%;
+    height: 100%;
+  }
+
+Title {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
 /*.form {*/
 /*    display: flex;*/
 /*    flex-direction: column;*/
@@ -44,18 +58,18 @@ App {
 /*}*/
 
 .card {
-    border: 1px solid rgba(252, 252, 252, 0.4);
+    border: 1px solid beige;
     background-color: rgba(252, 252, 252, 0.2);
     width: 500px;
     height: 400px;
     border-radius: 15px;
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: 'Raleway', sans-serif;
     padding: 10px 15px;
     margin: 0 auto 10px auto;
     display: block;
     text-align: center;
     font-size: 18px;
-    color: white;
+    color: beige;
     font-weight: 300;
     align-items: center;
     justify-content: center;
@@ -73,34 +87,34 @@ App {
 }
 
 .card input {
-    border: 1px solid rgba(252, 252, 252, 0.4);
+    border: 1px solid beige;
     background-color: rgba(252, 252, 252, 0.2);
     width: 250px;
     border-radius: 3px;
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: 'Raleway', sans-serif;
     padding: 10px 15px;
     margin: 0 auto 10px auto;
     display: block;
     text-align: center;
     font-size: 18px;
-    color: white;
+    color: beige;
     font-weight: 300;
     align-items: center;
     justify-content: center;
 }
 
 .form input {
-    border: 1px solid rgba(252, 252, 252, 0.4);
+    border: 1px solid beige;
     background-color: rgba(252, 252, 252, 0.2);
     width: 250px;
     border-radius: 3px;
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: 'Raleway', sans-serif;
     padding: 10px 15px;
     margin: 0 auto 10px auto;
     display: block;
     text-align: center;
     font-size: 18px;
-    color: white;
+    color: beige;
     font-weight: 300;
     align-items: center;
     justify-content: center;
@@ -108,9 +122,10 @@ App {
 
 
 .form button {
+    font-family: 'Raleway', sans-serif;
     appearance: none;
     outline: 0;
-    background-color: white;
+    background-color: beige;
     border: 0;
     padding: 10px 15px;
     color: #50a3a2;
