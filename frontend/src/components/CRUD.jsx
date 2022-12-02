@@ -1,8 +1,7 @@
-import './App.css';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect} from "react";
 import Axios from 'axios';
 
-function App() {
+function CRUD() {
     const [ArticleID, setArticleID] = useState('');
     const [Title, setTitle] = useState('');
     const [Author, setAuthor] = useState('');
@@ -95,7 +94,7 @@ function App() {
                             <h1> ArticleID: {val.ArticleID}</h1>
                             <p> Title: {val.Title}</p>
                             <p> Author: {val.Author}</p>
-                            <p> Date: {val.Date}</p>
+                            <p> Date: {val.Date.substring(0, 10)}</p>
                             <p> PublicationID: {val.PublicationID}</p>
                             <p> Likes: {val.Likes}</p>
                             <p> Dislikes: {val.Dislikes}</p>
@@ -126,32 +125,25 @@ function App() {
 
             <h2>INSERT Article</h2>
             <div className='form'>
-                <label>ArticleID:</label>
-                <input type="text" name="ArticleID" onChange={(e) => {
+                <input type="text" name="ArticleID" placeholder="Article ID" onChange={(e) => {
                     setArticleID(e.target.value)
                 }}/>
-                <label>Title:</label>
-                <input type="text" name="Title" onChange={(e) => {
+                <input type="text" name="Title" placeholder="Title" onChange={(e) => {
                     setTitle(e.target.value)
                 }}/>
-                <label>Author:</label>
-                <input type="text" name="Author" onChange={(e) => {
+                <input type="text" name="Author" placeholder="Author" onChange={(e) => {
                     setAuthor(e.target.value)
                 }}/>
-                <label>Date:</label>
-                <input type="text" name="Date" onChange={(e) => {
+                <input type="text" name="Date" placeholder="Date" onChange={(e) => {
                     setDate(e.target.value)
                 }}/>
-                <label>PublicationID:</label>
-                <input type="text" name="PublicationID" onChange={(e) => {
+                <input type="text" name="PublicationID" placeholder="PublicationID" onChange={(e) => {
                     setPublicationID(e.target.value)
                 }}/>
-                <label>Likes:</label>
-                <input type="text" name="Likes" onChange={(e) => {
+                <input type="text" name="Likes" placeholder="Likes" onChange={(e) => {
                     setLikes(e.target.value)
                 }}/>
-                <label>Dislikes:</label>
-                <input type="text" name="Dislikes" onChange={(e) => {
+                <input type="text" name="Dislikes" placeholder="Dislikes" onChange={(e) => {
                     setDislikes(e.target.value)
                 }}/>
 
@@ -162,7 +154,7 @@ function App() {
                             <h1> ArticleID: {val.ArticleID}</h1>
                             <p> Title: {val.Title}</p>
                             <p> Author: {val.Author}</p>
-                            <p> Date: {val.Date}</p>
+                            <p> Date: {val.Date.substring(0, 10)}</p>
                             <p> PublicationID: {val.PublicationID}</p>
                             <p> Likes: {val.Likes}</p>
                             <p> Dislikes: {val.Dislikes}</p>
@@ -182,10 +174,7 @@ function App() {
                 })}
             </div>
         </div>
-    )
-        ;
+    );
 }
 
-export default App;
-
-// to run npm start
+export default CRUD;
