@@ -1,5 +1,25 @@
 import React, {useState, useEffect} from "react";
 import Axios from 'axios';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import {Bar} from 'react-chartjs-2';
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+);
+
 
 function CRUD() {
     const [ArticleID, setArticleID] = useState('');
@@ -23,6 +43,33 @@ function CRUD() {
 
     const [LoggedIn, setLoggedIn] = useState(false);
     const [currArticleID, setCurrArticleID] = useState('');
+
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: false,
+                text: 'Countries of The Week',
+            },
+        },
+    };
+
+    const [labels, setLabels] = useState([]);
+    const [heat, setHeat] = useState([]);
+
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: 'Heat',
+                data: heat,
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            }
+        ],
+    };
 
     useEffect(() => {
         Axios.get('http://localhost:3001/api/get').then((response) => {
@@ -152,14 +199,10 @@ function CRUD() {
         });
     };
 
-    const advQuery1 = () => {
-        Axios.get(`http://localhost:3001/api/adv1`).then((response) => {
-            console.log(response.data);
-        });
-    }
-
-    const advQuery2 = () => {
-        Axios.get(`http://localhost:3001/api/adv2`).then((response) => {
+    const getStat = () => {
+        Axios.get(`http://localhost:3001/api/stat`).then((response) => {
+            setLabels(response.data.map(x => Object.values(x)[0]));
+            setHeat(response.data.map(x => Object.values(x)[1]));
             console.log(response.data);
         });
     }
@@ -215,8 +258,9 @@ function CRUD() {
             </div>
 
             <h2>User Login/Register</h2>
-            <h1>{LoggedIn ? <img src={require("./yes.png")} width={"50px"} alt="Yes"/> :
-                <img src={require("./no.png")} width={"50px"} alt="No"/>}</h1>
+            <h1>{LoggedIn ? <img src={require("./yes.png")} width={"100px"} alt="Yes"/> :
+                <img src={require("./no.png")} width={"100px"} alt="No"/>}</h1>
+            <h1>Current User: {UserID !== '' ? UserID : "N/A"}</h1>
             <div className='form'>
                 <input type="text" placeholder="Username" onChange={(e) => {
                     setUsername(e.target.value)
@@ -289,12 +333,10 @@ function CRUD() {
 
             </div>
 
-            <h2>Advanced Queries</h2>
+            <h2>Countries of The Week</h2>
+            <Bar options={options} data={data}/>
             <div className='form center'>
-                <button onClick={advQuery1}> Run Advanced Query 1</button>
-                <br/>
-                <br/>
-                <button onClick={advQuery2}> Run Advanced Query 2</button>
+                <button onClick={getStat}> Get Countries of the Week!</button>
             </div>
 
             <h2>INSERT Article</h2>
