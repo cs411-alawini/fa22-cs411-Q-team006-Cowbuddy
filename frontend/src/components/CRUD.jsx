@@ -14,11 +14,96 @@ function CRUD() {
     const [newTitle, setNewTitle] = useState('');
     const [searchID, setSearchID] = useState('');
 
+    const [Username, setUsername] = useState('');
+    const [UserID, setUserID] = useState('');
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
+
+    const [Content, setContent] = useState('');
+
     useEffect(() => {
         Axios.get('http://localhost:3001/api/get').then((response) => {
             setArticleList(response.data);
         })
     }, [])
+
+    const getUsernamePassword = () => {
+        Axios.get(`http://localhost:3001/api/user`, {
+            Username: Username,
+            Email: Email,
+            Password: Password
+        }).then((response) => {
+            setUserID(response.data);
+            console.log(response.data);
+        });
+    };
+
+    const setUsernamePassword = () => {
+        Axios.post(`http://localhost:3001/api/insertUser/`, {
+            Username: Username,
+            Email: Email,
+            Password: Password
+        }).then((response) => {
+            setUserID(response.data);
+            console.log(response.data);
+        });
+    };
+
+    const postLike = () => {
+        Axios.get(`http://localhost:3001/api/like`, {
+            UserID: UserID,
+            ArticleID: ArticleID
+        }).then((response) => {
+            console.log(response.data);
+        });
+    };
+
+    const postDislike = () => {
+        Axios.get(`http://localhost:3001/api/dislike`, {
+            UserID: UserID,
+            ArticleID: ArticleID
+        }).then((response) => {
+            console.log(response.data);
+        });
+    };
+
+    const postUndoLike = () => {
+        Axios.get(`http://localhost:3001/api/undoLike`, {
+            UserID: UserID,
+            ArticleID: ArticleID
+        }).then((response) => {
+            console.log(response.data);
+        });
+    };
+
+    const postUndoDislike = () => {
+        Axios.get(`http://localhost:3001/api/undoDislike`, {
+            UserID: UserID,
+            ArticleID: ArticleID
+        }).then((response) => {
+            console.log(response.data);
+        });
+    };
+
+    const postComment = () => {
+        Axios.get(`http://localhost:3001/api/comment`, {
+            UserID: UserID,
+            ArticleID: ArticleID,
+            Content: Content,
+        }).then((response) => {
+            console.log(response.data);
+        });
+    };
+
+    const postUnComment = () => {
+        Axios.get(`http://localhost:3001/api/uncomment`, {
+            UserID: UserID,
+            ArticleID: ArticleID,
+            Content: Content,
+        }).then((response) => {
+            console.log(response.data);
+        });
+    };
 
     const searchArticle = () => {
         Axios.get(`http://localhost:3001/api/search/${searchID}`).then((response) => {
@@ -75,19 +160,45 @@ function CRUD() {
         setNewTitle("")
     };
 
+    const resetUserInfo = () => { // handles logout which is just clearing all inputs
+        setPassword('');
+        setUsername('');
+        setEmail('');
+        setUserID('');
+    };
+
 
     return (
         <div className="App">
             <h1>CRUD APPLICATIONS</h1>
 
+            <h2>User Login/Register</h2>
+            <div className='form'>
+                <input type="text" placeholder="Username" onChange={(e) => {
+                    setUsername(e.target.value)
+                }}/>
+                <input type="text" placeholder="Email" onChange={(e) => {
+                    setEmail(e.target.value)
+                }}/>
+                <input type="password" placeholder="Password" onChange={(e) => {
+                    setPassword(e.target.value)
+                }}/>
+                <div className="center">
+                    <button type="submit" onClick={setUsernamePassword}>Register</button>
+                    <button type="submit" onClick={getUsernamePassword}>Login</button>
+                    <button type="submit" onClick={resetUserInfo}>Logout</button>
+                </div>
+            </div>
+
             <h2>SEARCH Article</h2>
             <div className='form'>
-                <label>ArticleID:</label>
-                <input type="text" name="searchID" onChange={(e) => {
+                <input type="text" name="searchID" placeholder="Article ID" onChange={(e) => {
                     setSearchID(e.target.value)
                 }}/>
-
-                <button onClick={searchArticle}> Submit</button>
+                <div className="center">
+                    <button onClick={searchArticle}> Submit</button>
+                </div>
+                <br/>
                 {searchArticleList.map((val) => {
                     return (
                         <div className="card">
@@ -112,13 +223,32 @@ function CRUD() {
                         </div>
                     );
                 })}
+                <br/>
+                <br/>
+
+                <div className="center">
+                    <button onClick={postLike}>Like</button>
+                    <button onClick={postDislike}>Dislike</button>
+                    <button onClick={postUndoLike}>UnLike</button>
+                    <button onClick={postUndoDislike}>UnDislike</button>
+                </div>
+                <br/>
+                <br/>
+                <input type="text" name="searchID" placeholder="Comment Here" onChange={(e) => {
+                    setContent(e.target.value)
+                }}/>
+                <div className="center">
+                <button onClick={postComment}>Comment</button>
+                <button onClick={postUnComment}>Uncomment</button>
+                </div>
+
 
             </div>
 
             <h2>Advanced Queries</h2>
-            <div className='form'>
+            <div className='form center'>
                 <button onClick={advQuery1}> Run Advanced Query 1</button>
-
+                <br/>
                 <br/>
                 <button onClick={advQuery2}> Run Advanced Query 2</button>
             </div>
@@ -147,7 +277,12 @@ function CRUD() {
                     setDislikes(e.target.value)
                 }}/>
 
+                <div className="center">
                 <button onClick={submitArticle}> Submit</button>
+                </div>
+                <br/>
+                <br/>
+                <br/>
                 {articleList.map((val) => {
                     return (
                         <div className="card">
@@ -158,11 +293,15 @@ function CRUD() {
                             <p> PublicationID: {val.PublicationID}</p>
                             <p> Likes: {val.Likes}</p>
                             <p> Dislikes: {val.Dislikes}</p>
+                            <br/>
                             <button onClick={() => {
                                 deleteArticle(val.ArticleID)
                             }}> Delete
+                                <br/>
                             </button>
-                            <input type="text" id='updateInput' onChange={(e) => {
+                            <br/>
+                            <br/>
+                            <input type="text" id='updateInput' placeholder="New Title" onChange={(e) => {
                                 setNewTitle(e.target.value)
                             }}/>
                             <button onClick={() => {

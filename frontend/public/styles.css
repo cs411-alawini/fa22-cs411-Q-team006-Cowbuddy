@@ -44,11 +44,21 @@ App {
 /*}*/
 
 .card {
+    border: 1px solid rgba(252, 252, 252, 0.4);
+    background-color: rgba(252, 252, 252, 0.2);
     width: 500px;
     height: 400px;
-    border: 2px solid grey;
     border-radius: 15px;
-    margin: 10px;
+    font-family: "Source Sans Pro", sans-serif;
+    padding: 10px 15px;
+    margin: 0 auto 10px auto;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    font-weight: 300;
+    align-items: center;
+    justify-content: center;
 }
 
 #updateInput {
@@ -60,6 +70,23 @@ App {
 .form {
     padding: 20px 0;
     position: relative;
+}
+
+.card input {
+    border: 1px solid rgba(252, 252, 252, 0.4);
+    background-color: rgba(252, 252, 252, 0.2);
+    width: 250px;
+    border-radius: 3px;
+    font-family: "Source Sans Pro", sans-serif;
+    padding: 10px 15px;
+    margin: 0 auto 10px auto;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    font-weight: 300;
+    align-items: center;
+    justify-content: center;
 }
 
 .form input {
@@ -79,6 +106,7 @@ App {
     justify-content: center;
 }
 
+
 .form button {
     appearance: none;
     outline: 0;
@@ -89,4 +117,14 @@ App {
     border-radius: 3px;
     width: 250px;
     font-size: 18px;
+    align-items: center;
+}
+
+.center {
+    width: 100%;
+    text-align: center;
+}
+.center div {
+    width: 33.33%;
+    display: inline-block;
 }
