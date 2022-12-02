@@ -257,6 +257,7 @@ function CRUD() {
             <h2>User Login/Register</h2>
             <h1>{LoggedIn ? <img src={require("./yes.png")} width={"100px"} alt="Yes"/> :
                 <img src={require("./no.png")} width={"100px"} alt="No"/>}</h1>
+            <h1>Current User: {UserID !== '' ? UserID : "N/A"}</h1>
             <div className='form'>
                 <input type="text" placeholder="Username" onChange={(e) => {
                     setUsername(e.target.value)
