@@ -51,8 +51,8 @@ function CRUD() {
                 position: 'top',
             },
             title: {
-                display: true,
-                text: 'Chart.js Bar Chart',
+                display: false,
+                text: 'Countries of The Week',
             },
         },
     };
