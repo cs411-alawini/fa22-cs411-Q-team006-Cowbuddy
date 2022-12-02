@@ -208,12 +208,15 @@ function CRUD() {
 
 
     return (
+        
         <div className="App">
-            <h1>CRUD APPLICATIONS</h1>
+            <div className="center">
+                <h1> What Country Is In The News?</h1>
+            </div>
 
             <h2>User Login/Register</h2>
-            <h1>{LoggedIn ? <img src={require("./yes.png")} width={"100px"} alt="Yes"/> :
-                <img src={require("./no.png")} width={"100px"} alt="No"/>}</h1>
+            <h1>{LoggedIn ? <img src={require("./yes.png")} width={"50px"} alt="Yes"/> :
+                <img src={require("./no.png")} width={"50px"} alt="No"/>}</h1>
             <div className='form'>
                 <input type="text" placeholder="Username" onChange={(e) => {
                     setUsername(e.target.value)
@@ -270,8 +273,8 @@ function CRUD() {
                 <div className="center">
                     <button onClick={postLike}>Like</button>
                     <button onClick={postDislike}>Dislike</button>
-                    <button onClick={postUndoLike}>UnLike</button>
-                    <button onClick={postUndoDislike}>UnDislike</button>
+                    <button onClick={postUndoLike}>Unlike</button>
+                    <button onClick={postUndoDislike}>Undislike</button>
                 </div>
                 <br/>
                 <br/>
