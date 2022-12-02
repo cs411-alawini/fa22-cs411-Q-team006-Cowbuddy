@@ -197,33 +197,17 @@ app.post("/api/uncomment/", (require, response) => {
 });
 
 
-app.get("/api/adv1", (require, response) => {
-    const sqlAdv1 = "SELECT DISTINCT ArticleID, Title, DateLiked, Likes " +
-        "FROM Articles a JOIN Likes l USING (ArticleID) " +
-        "WHERE DateLiked > 20221014 AND Likes > 400 " +
-        "UNION " +
-        "SELECT DISTINCT ArticleID, Title, DateDisliked, Dislikes " +
-        "FROM Articles a JOIN Dislikes d USING (ArticleID) " +
-        "WHERE DateDisliked > 20221014 AND Dislikes > 250 " +
-        "ORDER BY ArticleID;";
-    db.query(sqlAdv1, (err, result) => {
+app.get("/api/stat", (require, response) => {
+    const sqlSP = "CALL GetCountriesOfTheWeek";
+    db.query(sqlSP, (err, result) => {
+        console.log(err);
+    });
+    const sqlRet = "SELECT * FROM CountriesOfTheWeek ORDER BY Heat DESC";
+    db.query(sqlRet, (err, result) => {
+        console.log(err);
         response.send(result);
     });
 });
-
-app.get("/api/adv2", (require, response) => {
-    const sqlAdv2 = "SELECT a.Title, a.Date, t.NumberOfArticles " +
-        "FROM Articles a NATURAL JOIN (" +
-        "    SELECT Author, COUNT(*) NumberOfArticles " +
-        "    FROM Articles " +
-        "    WHERE Title LIKE '%The%' OR Title LIKE '%the%' " +
-        "    GROUP BY Author " +
-        ") t " +
-        "ORDER BY t.NumberOfArticles DESC, a.Title;"
-    db.query(sqlAdv2, (err, result) => {
-        response.send(result);
-    })
-})
 
 app.post("/api/insert", (require, response) => {
     const ArticleID = require.body.ArticleID;
