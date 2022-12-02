@@ -21,36 +21,55 @@ function CRUD() {
 
     const [Content, setContent] = useState('');
 
+    const [LoggedIn, setLoggedIn] = useState(false);
+
     useEffect(() => {
         Axios.get('http://localhost:3001/api/get').then((response) => {
             setArticleList(response.data);
         })
     }, [])
 
-    const getUsernamePassword = () => {
-        Axios.get(`http://localhost:3001/api/user`, {
+    const checkUsernamePassword = () => {
+        Axios.post(`http://localhost:3001/api/login`, {
             Username: Username,
-            Email: Email,
             Password: Password
         }).then((response) => {
-            setUserID(response.data);
-            console.log(response.data);
+            if (0 !== response.data.length) {
+                setUserID(response.data);
+                setLoggedIn(true);
+                console.log(response.data);
+            } else {
+                console.log("Incorrect username/password!");
+            }
+        }).catch(error => {
+            console.error(error);
         });
     };
 
     const setUsernamePassword = () => {
-        Axios.post(`http://localhost:3001/api/insertUser/`, {
+        Axios.post(`http://localhost:3001/api/register/`, {
             Username: Username,
             Email: Email,
             Password: Password
         }).then((response) => {
-            setUserID(response.data);
-            console.log(response.data);
+            if (0 !== response.data.length) {
+                setUserID(response.data);
+                setLoggedIn(true);
+                console.log(response.data);
+            } else {
+                console.log("Failed to register!")
+            }
+        }).catch(error => {
+            console.error(error)
         });
     };
 
     const postLike = () => {
-        Axios.get(`http://localhost:3001/api/like`, {
+        if (UserID === '') {
+            console.error("Not logged in!");
+            return;
+        }
+        Axios.post(`http://localhost:3001/api/like`, {
             UserID: UserID,
             ArticleID: ArticleID
         }).then((response) => {
@@ -59,7 +78,11 @@ function CRUD() {
     };
 
     const postDislike = () => {
-        Axios.get(`http://localhost:3001/api/dislike`, {
+        if (UserID === '') {
+            console.error("Not logged in!");
+            return;
+        }
+        Axios.post(`http://localhost:3001/api/dislike`, {
             UserID: UserID,
             ArticleID: ArticleID
         }).then((response) => {
@@ -68,7 +91,11 @@ function CRUD() {
     };
 
     const postUndoLike = () => {
-        Axios.get(`http://localhost:3001/api/undoLike`, {
+        if (UserID === '') {
+            console.error("Not logged in!");
+            return;
+        }
+        Axios.post(`http://localhost:3001/api/undoLike`, {
             UserID: UserID,
             ArticleID: ArticleID
         }).then((response) => {
@@ -77,7 +104,11 @@ function CRUD() {
     };
 
     const postUndoDislike = () => {
-        Axios.get(`http://localhost:3001/api/undoDislike`, {
+        if (UserID === '') {
+            console.error("Not logged in!");
+            return;
+        }
+        Axios.post(`http://localhost:3001/api/undoDislike`, {
             UserID: UserID,
             ArticleID: ArticleID
         }).then((response) => {
@@ -86,7 +117,11 @@ function CRUD() {
     };
 
     const postComment = () => {
-        Axios.get(`http://localhost:3001/api/comment`, {
+        if (UserID === '') {
+            console.error("Not logged in!");
+            return;
+        }
+        Axios.post(`http://localhost:3001/api/comment`, {
             UserID: UserID,
             ArticleID: ArticleID,
             Content: Content,
@@ -96,7 +131,11 @@ function CRUD() {
     };
 
     const postUnComment = () => {
-        Axios.get(`http://localhost:3001/api/uncomment`, {
+        if (UserID === '') {
+            console.error("Not logged in!");
+            return;
+        }
+        Axios.post(`http://localhost:3001/api/uncomment`, {
             UserID: UserID,
             ArticleID: ArticleID,
             Content: Content,
@@ -161,10 +200,8 @@ function CRUD() {
     };
 
     const resetUserInfo = () => { // handles logout which is just clearing all inputs
-        setPassword('');
-        setUsername('');
-        setEmail('');
         setUserID('');
+        setLoggedIn(false);
     };
 
 
@@ -173,6 +210,7 @@ function CRUD() {
             <h1>CRUD APPLICATIONS</h1>
 
             <h2>User Login/Register</h2>
+            <h1>{LoggedIn ? <img src={require("./yes.png")} width={"100px"} alt="Yes"/> : <img src={require("./no.png")} width={"100px"} alt="No"/>}</h1>
             <div className='form'>
                 <input type="text" placeholder="Username" onChange={(e) => {
                     setUsername(e.target.value)
@@ -185,7 +223,7 @@ function CRUD() {
                 }}/>
                 <div className="center">
                     <button type="submit" onClick={setUsernamePassword}>Register</button>
-                    <button type="submit" onClick={getUsernamePassword}>Login</button>
+                    <button type="submit" onClick={checkUsernamePassword}>Login</button>
                     <button type="submit" onClick={resetUserInfo}>Logout</button>
                 </div>
             </div>
@@ -238,8 +276,8 @@ function CRUD() {
                     setContent(e.target.value)
                 }}/>
                 <div className="center">
-                <button onClick={postComment}>Comment</button>
-                <button onClick={postUnComment}>Uncomment</button>
+                    <button onClick={postComment}>Comment</button>
+                    <button onClick={postUnComment}>Uncomment</button>
                 </div>
 
 
@@ -278,7 +316,7 @@ function CRUD() {
                 }}/>
 
                 <div className="center">
-                <button onClick={submitArticle}> Submit</button>
+                    <button onClick={submitArticle}> Submit</button>
                 </div>
                 <br/>
                 <br/>

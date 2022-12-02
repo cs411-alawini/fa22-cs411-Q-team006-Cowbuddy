@@ -46,36 +46,37 @@ app.get("/api/search/:ArticleID", (require, response) => {
         response.send(result);
     });
 });
-app.post("/api/insertUser/", (require, response) => { // Create New Account
+
+app.post("/api/register/", (require, response) => { // Create New Account
     const Username = require.body.Username;
     const Email = require.body.Email;
     const Password = require.body.Password;
     if (Username && Email && Password) { // Checking to make sure nothing happens when not all inputs filled
-        const fquery = "SELECT max(UserID) FROM `Users`";
-        const sqlSelect = "INSERT INTO `Users` VALUES (?,?,?,?,?,?,?)";
-        var todayDate = new Date().toISOString().slice(0, 10);
-        db.query(fquery, (err2, result2) => {
-            db.query(sqlSelect, [result2 + 1, Email, Username, Password, 0, 0, todayDate], (err, result) => {
-                response.send(result2 + 1); // Sends back UserID
-            });
+        const sqlInsert = "INSERT IGNORE INTO `Users` VALUES (?,?,?,?,?,?,?)";
+        const todayDate = new Date().toISOString().slice(0, 10);
+        db.query(sqlInsert, [0, Email, Username, Password, 0, 0, todayDate], (err, result) => {
+            console.error(err);
         });
+        const sqlSelect = "SELECT `UserID` FROM `Users` WHERE `Username` = ?";
+        db.query(sqlSelect, [Username], (err, result) => {
+            response.send(result);
+        })
     } else {
-        response.send("Not all inputs populated");
+        response.send(null);
     }
 
 });
 
-app.get("/api/user/", (require, response) => { // Login Process
+app.post("/api/login/", (require, response) => { // Login Process
     const Username = require.body.Username;
-    const Email = require.body.Email;
     const Password = require.body.Password;
-    if (Username && Email && Password) {
-        const sqlSelect = "SELECT UserID FROM `Users` WHERE `Username` = ? and `Email` = ? and `Password` = ?";
-        db.query(sqlSelect, [Username, Email, Password], (err, result) => {
+    if (Username && Password) {
+        const sqlSelect = "SELECT `UserID` FROM `Users` WHERE `Username` = ? AND `Password` = ?";
+        db.query(sqlSelect, [Username, Password], (err, result) => {
             response.send(result); // Sends back UserID
         });
     } else {
-        response.send("Not all inputs populated");
+        response.send(null);
     }
 });
 
@@ -85,12 +86,10 @@ app.post("/api/like/", (require, response) => {
 
     if (UserID) { // Checking to make sure nothing happens when not all inputs filled
         if (ArticleID) {
-            const sqlUpdate = "UPDATE `Articles` SET `Likes` = `Likes` + 1 WHERE `ArticleID` = ?";
-            const sqlSelect = "UPDATE `Users` SET `ArticlesLiked` = `ArticlesLiked` + 1 WHERE `UserID` = ?";
-            db.query(sqlUpdate, ArticleID, (err, result) => {
-                db.query(sqlSelect, UserID, (err2, result2) => {
-                    response.send("Liked Article");
-                });
+            const sqlInsert = "INSERT INTO `Events` VALUES (?,?,?,?)"
+            db.query(sqlInsert, [UserID, ArticleID, 0, ''], (err, result) => {
+                console.error(err);
+                response.send("Liked!");
             });
         } else {
             response.send("You haven't chosen an Article!");
