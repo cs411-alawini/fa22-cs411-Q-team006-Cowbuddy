@@ -22,6 +22,7 @@ function CRUD() {
     const [Content, setContent] = useState('');
 
     const [LoggedIn, setLoggedIn] = useState(false);
+    const [currArticleID, setCurrArticleID] = useState('');
 
     useEffect(() => {
         Axios.get('http://localhost:3001/api/get').then((response) => {
@@ -35,7 +36,7 @@ function CRUD() {
             Password: Password
         }).then((response) => {
             if (0 !== response.data.length) {
-                setUserID(response.data);
+                setUserID(Object.values(response.data[0])[0]);
                 setLoggedIn(true);
                 console.log(response.data);
             } else {
@@ -53,7 +54,7 @@ function CRUD() {
             Password: Password
         }).then((response) => {
             if (0 !== response.data.length) {
-                setUserID(response.data);
+                setUserID(Object.values(response.data[0])[0]);
                 setLoggedIn(true);
                 console.log(response.data);
             } else {
@@ -71,7 +72,7 @@ function CRUD() {
         }
         Axios.post(`http://localhost:3001/api/like`, {
             UserID: UserID,
-            ArticleID: ArticleID
+            ArticleID: currArticleID
         }).then((response) => {
             console.log(response.data);
         });
@@ -84,7 +85,7 @@ function CRUD() {
         }
         Axios.post(`http://localhost:3001/api/dislike`, {
             UserID: UserID,
-            ArticleID: ArticleID
+            ArticleID: currArticleID
         }).then((response) => {
             console.log(response.data);
         });
@@ -97,7 +98,7 @@ function CRUD() {
         }
         Axios.post(`http://localhost:3001/api/undoLike`, {
             UserID: UserID,
-            ArticleID: ArticleID
+            ArticleID: currArticleID
         }).then((response) => {
             console.log(response.data);
         });
@@ -110,7 +111,7 @@ function CRUD() {
         }
         Axios.post(`http://localhost:3001/api/undoDislike`, {
             UserID: UserID,
-            ArticleID: ArticleID
+            ArticleID: currArticleID
         }).then((response) => {
             console.log(response.data);
         });
@@ -123,7 +124,7 @@ function CRUD() {
         }
         Axios.post(`http://localhost:3001/api/comment`, {
             UserID: UserID,
-            ArticleID: ArticleID,
+            ArticleID: currArticleID,
             Content: Content,
         }).then((response) => {
             console.log(response.data);
@@ -137,7 +138,7 @@ function CRUD() {
         }
         Axios.post(`http://localhost:3001/api/uncomment`, {
             UserID: UserID,
-            ArticleID: ArticleID,
+            ArticleID: currArticleID,
             Content: Content,
         }).then((response) => {
             console.log(response.data);
@@ -146,6 +147,7 @@ function CRUD() {
 
     const searchArticle = () => {
         Axios.get(`http://localhost:3001/api/search/${searchID}`).then((response) => {
+            setCurrArticleID(Object.values(response.data[0])[0]);
             setSearchArticleList(response.data);
         });
     };
@@ -210,7 +212,8 @@ function CRUD() {
             <h1>CRUD APPLICATIONS</h1>
 
             <h2>User Login/Register</h2>
-            <h1>{LoggedIn ? <img src={require("./yes.png")} width={"100px"} alt="Yes"/> : <img src={require("./no.png")} width={"100px"} alt="No"/>}</h1>
+            <h1>{LoggedIn ? <img src={require("./yes.png")} width={"100px"} alt="Yes"/> :
+                <img src={require("./no.png")} width={"100px"} alt="No"/>}</h1>
             <div className='form'>
                 <input type="text" placeholder="Username" onChange={(e) => {
                     setUsername(e.target.value)
@@ -251,7 +254,7 @@ function CRUD() {
                                 deleteArticle(val.ArticleID)
                             }}> Delete
                             </button>
-                            <input type="text" id='updateInput' onChange={(e) => {
+                            <input type="text" id='1' onChange={(e) => {
                                 setNewTitle(e.target.value)
                             }}/>
                             <button onClick={() => {
@@ -339,7 +342,7 @@ function CRUD() {
                             </button>
                             <br/>
                             <br/>
-                            <input type="text" id='updateInput' placeholder="New Title" onChange={(e) => {
+                            <input type="text" placeholder="New Title" onChange={(e) => {
                                 setNewTitle(e.target.value)
                             }}/>
                             <button onClick={() => {

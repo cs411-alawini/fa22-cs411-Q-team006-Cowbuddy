@@ -86,7 +86,7 @@ app.post("/api/like/", (require, response) => {
 
     if (UserID) { // Checking to make sure nothing happens when not all inputs filled
         if (ArticleID) {
-            const sqlInsert = "INSERT INTO `Events` VALUES (?,?,?,?)"
+            const sqlInsert = "REPLACE INTO `Events` (UserID, ArticleID, Type, Content) VALUES (?,?,?,?)"
             db.query(sqlInsert, [UserID, ArticleID, 0, ''], (err, result) => {
                 console.error(err);
                 response.send("Liked!");
@@ -97,7 +97,6 @@ app.post("/api/like/", (require, response) => {
     } else {
         response.send("You haven't logged in!");
     }
-
 });
 
 app.post("/api/dislike/", (require, response) => {
@@ -106,9 +105,10 @@ app.post("/api/dislike/", (require, response) => {
 
     if (UserID) { // Checking to make sure nothing happens when not all inputs filled
         if (ArticleID) {
-            const sqlUpdate = "UPDATE `Articles` SET `Dislikes` = `Dislikes` + 1 WHERE `ArticleID` = ?";
-            db.query(sqlUpdate, ArticleID, (err, result) => {
-                response.send("Disliked Article");
+            const sqlInsert = "REPLACE INTO `Events` (UserID, ArticleID, Type, Content) VALUES (?,?,?,?)"
+            db.query(sqlInsert, [UserID, ArticleID, 1, ''], (err, result) => {
+                console.error(err);
+                response.send("Disliked!");
             });
         } else {
             response.send("You haven't chosen an Article!");
@@ -116,7 +116,6 @@ app.post("/api/dislike/", (require, response) => {
     } else {
         response.send("You haven't logged in!");
     }
-
 });
 
 app.post("/api/undoDislike/", (require, response) => {
@@ -125,9 +124,10 @@ app.post("/api/undoDislike/", (require, response) => {
 
     if (UserID) { // Checking to make sure nothing happens when not all inputs filled
         if (ArticleID) {
-            const sqlUpdate = "UPDATE `Articles` SET `Dislikes` = `Dislikes` - 1 WHERE `ArticleID` = ?";
-            db.query(sqlUpdate, ArticleID, (err, result) => {
-                response.send("Un-Disliked Article");
+            const sqlDelete = "DELETE FROM `Events` WHERE `UserID` = ? AND `ArticleID` = ? AND `Type` = ?";
+            db.query(sqlDelete, [UserID, ArticleID, 1, ''], (err, result) => {
+                console.error(err);
+                response.send("Un-disliked!");
             });
         } else {
             response.send("You haven't chosen an Article!");
@@ -135,7 +135,6 @@ app.post("/api/undoDislike/", (require, response) => {
     } else {
         response.send("You haven't logged in!");
     }
-
 });
 
 app.post("/api/undoLike/", (require, response) => {
@@ -144,12 +143,10 @@ app.post("/api/undoLike/", (require, response) => {
 
     if (UserID) { // Checking to make sure nothing happens when not all inputs filled
         if (ArticleID) {
-            const sqlUpdate = "UPDATE `Articles` SET `Likes` = `Likes` - 1 WHERE `ArticleID` = ?";
-            const sqlSelect = "UPDATE `Users` SET `ArticlesLiked` = `ArticlesLiked` - 1 WHERE `UserID` = ?";
-            db.query(sqlUpdate, ArticleID, (err, result) => {
-                db.query(sqlSelect, UserID, (err2, result2) => {
-                    response.send("Un-Liked Article");
-                });
+            const sqlDelete = "DELETE FROM `Events` WHERE `UserID` = ? AND `ArticleID` = ? AND `Type` = ?";
+            db.query(sqlDelete, [UserID, ArticleID, 0, ''], (err, result) => {
+                console.error(err);
+                response.send("Un-liked!");
             });
         } else {
             response.send("You haven't chosen an Article!");
@@ -157,21 +154,19 @@ app.post("/api/undoLike/", (require, response) => {
     } else {
         response.send("You haven't logged in!");
     }
-
 });
 
 app.post("/api/comment/", (require, response) => {
     const UserID = require.body.UserID;
     const ArticleID = require.body.ArticleID;
     const Content = require.body.Content;
-    //const DateCommented = require.body.DateCommented;
 
     if (UserID) { // Checking to make sure nothing happens when not all inputs filled
         if (ArticleID) {
-            var todayDate = new Date().toISOString().slice(0, 10);
-            const sqlUpdate = "INSERT INTO `Comments` VALUES (?,?,?,?)";
-            db.query(sqlUpdate, [UserID, ArticleID, Content, todayDate], (err, result) => {
-                response.send("Comment Successful!")
+            const sqlInsert = "REPLACE INTO `Events` (UserID, ArticleID, Type, Content) VALUES (?,?,?,?)"
+            db.query(sqlInsert, [UserID, ArticleID, 2, Content], (err, result) => {
+                console.error(err);
+                response.send("Comment Successful!");
             });
         } else {
             response.send("You haven't chosen an Article!");
@@ -179,7 +174,6 @@ app.post("/api/comment/", (require, response) => {
     } else {
         response.send("You haven't logged in!");
     }
-
 });
 
 app.post("/api/uncomment/", (require, response) => {
@@ -189,9 +183,10 @@ app.post("/api/uncomment/", (require, response) => {
 
     if (UserID) { // Checking to make sure nothing happens when not all inputs filled
         if (ArticleID) {
-            const sqlUpdate = "DELETE FROM `Comments` WHERE `UserID` = ?, `ArticleID` = ?, `Content` = ?";
-            db.query(sqlUpdate, [UserID, ArticleID, Content], (err, result) => {
-                response.send("Comment Sucessfully Deleted!")
+            const sqlDelete = "DELETE FROM `Events` WHERE `UserID` = ? AND `ArticleID` = ? AND `Type` = ?";
+            db.query(sqlDelete, [UserID, ArticleID, 2, ''], (err, result) => {
+                console.error(err);
+                response.send("Comment Successfully Deleted!")
             });
         } else {
             response.send("You haven't chosen an Article!");
@@ -199,7 +194,6 @@ app.post("/api/uncomment/", (require, response) => {
     } else {
         response.send("You haven't logged in!");
     }
-
 });
 
 
